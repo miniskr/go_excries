@@ -1,16 +1,13 @@
 package main
 
-import "fmt"
-
-func getData() (int, int) {
-	return 100, 200
-}
+import (
+	"fmt"
+	"math"
+)
 
 // 匿名变量
 func main() {
-	a, _ := getData()
+	fmt.Printf("%f\n", math.Pi)
 
-	_, b := getData()
-
-	fmt.Println(a, b)
+	fmt.Printf("%.2f\n", math.Pi)
 }
