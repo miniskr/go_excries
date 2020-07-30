@@ -1,53 +1,30 @@
 package main
 
 import (
-	"image"
-	"image/color"
-	"image/png"
-	"log"
+	"fmt"
 	"math"
-	"os"
 )
 
-func sinimage() {
-	const size = 300
-	// 1. 设置白色背景图
-	pic := image.NewGray(image.Rect(0, 0, size, size))
-
-	for x := 0; x < size; x++ {
-		for y := 0; y < size; y++ {
-			pic.SetGray(x, y, color.Gray{255})
-		}
-	}
-
-	// 2. 画正弦函数
-	for x := 0; x < size; x++ {
-		// 让sin值的范围在0~2pi之间
-		s := float64(x) * 2 * math.Pi / size
-
-		// sin的幅度为一半的像素，向下偏移一半的像素并翻转
-		y := size/2 - math.Sin(s)*size/2
-
-		// 用黑色绘制sin轨迹
-
-		pic.SetGray(x, int(y), color.Gray{0})
-	}
-
-	// 3. 创建文件
-	file, err := os.Create("sin.png")
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// 使用png格式将数据写入文件
-	png.Encode(file, pic)
-
-	file.Close()
-
-}
-
-// 匿名变量
+// 转换不同的数据类型
 func main() {
-	sinimage()
+	// 输出各数值的范围
+	fmt.Println("int8 range:", math.MinInt8, math.MaxInt8)
+	fmt.Println("int16 range:", math.MinInt16, math.MaxInt16)
+	fmt.Println("int32 range:", math.MinInt32, math.MaxInt32)
+	fmt.Println("int64 range:", math.MinInt64, math.MaxInt64)
+
+	// 初始化一个32位整型
+	var a int32 = 1047483647
+	// 输出16进制和十进制
+	fmt.Printf("int32: 0x%x %d\n", a, a)
+
+	// 将a进制转为16进制， 发生数值截断
+	b := int16(a)
+	fmt.Printf("int16: 0x%x %d\n", b, b)
+
+	// 将常量保存为float32类型
+	var c float32 = math.Pi
+	// 转为int类型发生浮点丢失
+	fmt.Println(int(c))
+
 }
